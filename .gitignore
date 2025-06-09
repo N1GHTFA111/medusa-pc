@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.idea
+# Environment
+.env
+venv/
+
+# Databases
+*.db
+*.db.*
+*.bak
+*.dat
+*.dir
+
+# Secrets or config files
+pricelist.txt

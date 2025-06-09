@@ -1,0 +1,141 @@
+.brand-name {
+  font-size: 30px;
+}
+
+.portals-toggle {
+  background-color: green;
+  /* background-color: red; */
+}
+
+.grey {
+  color: grey;
+}
+
+.text-grey {
+  color: grey;
+}
+
+.sidebar-dark-blue {
+  background-color: #EFEFEF;
+}
+
+.sidebar-width {
+  width: 300px;
+}
+
+.sidebar-height {
+  min-height: 100vh;
+}
+
+.current {
+  color: orange;
+}
+
+.searchbar_styles{
+  width: 70vw;
+}
+
+/* .resize_icon{
+  height: 50px;
+} */
+
+.padding_icon{
+  margin: 10px;
+}
+
+.remove_hyperlink_decoration{
+  text-decoration: none;
+}
+
+.text_resize{
+  font-size: 35px;
+}
+
+.btn-margin{
+  margin-top: 40px;
+}
+
+.btn-resize {
+  height: 80px;
+  width: 200px;
+  font-size: 30px;
+}
+
+.centre{
+  margin-left: 600px;
+  margin-top: 250px;
+}
+
+.icon-move-right{
+  margin-left: 160px;
+}
+
+.centre_para{
+  margin-left: 740px;
+}
+
+.dropdown-move-right{
+    margin-left: 10%;
+}
+
+
+/*custom pc styles*/
+.resize_pc_img{
+    width: 70%;
+    height: auto;
+}
+
+.lengthen-input-destination-address{
+width: 70%;
+}
+
+
+.chatbot_background{
+background-color: grey;
+width: 0.25vw;
+height: 0.5vh;
+}
+
+.move-right-chatbot{
+position: absolute;
+z-index: 1;
+margin-left: 85%;
+margin-top: 45%;
+}
+
+.enlarge_3d {
+width: 75%;
+height: 75%;
+}
+
+header {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  z-index: 3;
+}
+
+#sidebarMenu {
+  min-height: 100vh !important;
+  position: fixed;
+  z-index: 2;
+  /* width: 300px !important; */
+  /* overflow-y: scroll; */
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  margin-top: 72px;
+  padding-bottom: 100px;
+}
+
+main {
+  padding-top: 100px;
+}
+
+table {
+  overflow: auto;
+}
+
+.bg-custom {
+  opacity: 85%;
+}

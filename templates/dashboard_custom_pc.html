@@ -1,0 +1,51 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Custom Medusa PCs</h1>
+        </div>
+        <br>
+        <div class="my-w4 w-100">
+          <h2>Configure and personalise your PC here!</h2>
+          <div class="row align-items-md-stretch">
+            <!-- on a medium size screen, take up 6 columns -->
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">Intel Tier 1</a></h2>
+                <p>Specs goes here...</p>
+                <button class="btn btn-outline-secondary" type="button" name="button" onclick=""><a href="{{ url_for('view_model', logged_in=current_user.is_authenticated)}}">View PC Model</a></button>
+                <button id="intel_tier_1" class="btn btn-outline-primary" type="button" name="button" onclick=""><a class="remove_hyperlink_decoration" href="{{ url_for('create_custom_pc', logged_in=current_user.is_authenticated)}}">Configure</a></button>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">Intel Tier 2</a></h2>
+                <p>Specs goes here...</p>
+                <button id="intel_tier_2" class="btn btn-outline-primary" type="button" name="button" onclick=""><a class="remove_hyperlink_decoration" href="{{ url_for('create_custom_pc', logged_in=current_user.is_authenticated, username=current_user.get_first_name())}}">Configure</a></button>
+              </div>
+
+            </div>
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">Intel Tier 3</a></h2>
+                <p>Specs goes here...</p>
+                <button id="intel_tier_3" class="btn btn-outline-primary" type="button" name="button" onclick=""><a class="remove_hyperlink_decoration">Configure</a></button>
+              </div>
+
+            </div>
+
+
+            </div>
+          </div>
+        </main>
+
+{% endblock %}

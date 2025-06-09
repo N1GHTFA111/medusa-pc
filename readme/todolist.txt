@@ -1,0 +1,52 @@
+Shipping management functions:
+
+User Backend:
+
+CreatingShipment(item_dict) returns shipment_obj 
+
+CreateShippingRate() returns shipment_id (done by Joshua)
+
+RetrieveShippingRate(shipment_id) returns shipping rate obj
+
+UpdateShippingRate(shipment_id, field_to_update, value) returns shipping rate obj
+
+
+Admin Backend:
+
+should use shelve to store time:shipping rate obj
+
+ListShippingRates()
+
+CreateShippingEntry()
+
+UpdateShippingEntry()
+
+DeleteShippingEntry()
+
+rest and sleep or play games
+
+=========================================================================================
+
+
+Reward Management functions:
+
+CreateCoupon()
+
+
+Note: A coupon should be created without the customer id first, so when the customer creates
+the coupon, only he or she can use it, however for a promo code, it should be visible to all customers
+hence create a shelve called CustomerCoupons.db that stores the available coupons and promo code tags in this format
+coupon_id:customer
+if customer == None:
+	it is a promo code
+once a promo code is used, it should be deleted
+
+to be clear, CustomerCoupons only stores the types of coupons that can be redeemed
+this serves only as a blueprint which contains coupon_id consisting of name and the coupon object consisting of necessary attributes to 
+create a coupon or promo code
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+Account: 17
+Coupon: 54
+Feedback: 54
+PointsAccount: 12
+Promo: 12
+Shipment: 38
+
+187
+
+Case: 48
+Computer: 113
+cooling: 30
+CPU: 50
+GPU: 38
+Keyboard: 19
+Memory: 19
+Motherboard: 20
+Mouse: 19
+Opsys: 20
+Powe_Supply: 19
+storage: 30
+wifi_card: 16
+
+441
+
+admin_index.css: 199
+dashboard.css: 109
+index.css: 199
+login.css: 247
+
+754
+
+admin_dashboard.js: 32
+
+32
+
+_formHelper.html: 9
+admin_base.html: 25
+admin_login.html: 29
+admin_upload_price.html: 17
+base.html: 25
+createPC.html: 47
+customer_download_pricelist.html: 20
+dashboard.html: 161
+dashboard_accessories.html: 110
+dashboard_admin.html: 60
+dashboard_adminbase.html: 145
+dashboard_AR_pc.html: 26
+dashboard_custom_pc.html: 51
+dashboard_pc_part.html: 367
+dashboardbase.html: 153
+email_failure_sent.html: 10
+email_success_sent.html: 10
+email_verification.html: 16
+forgot_password_form.html: 19
+index.html: 48
+index_admin.html: 47
+login.html: 29
+login_base.html: 24
+
+1448
+
+manageCoupons.html: 166
+manageInventory: 134 158
+manageUserVouchers.html: 51
+registerAdmin.html: 42
+registerUser.html: 45
+seeCart.html: 207
+updateAdmin.html: 73
+updatePC.html: 74
+updateUser.html: 73
+view_all_users.html: 146
+viewAdminShipments.html: 166
+viewAllUserFeedback.html: 115
+viewUserFeedback.html: 158
+viewUserShipments.html: 93
+
+1543
+
+Forms.py: 126
+init.py: 3283
+Inventory.py: 845
+Item.py: 67
+
+4321
+
+8726 8750

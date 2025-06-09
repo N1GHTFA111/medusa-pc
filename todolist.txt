@@ -1,0 +1,34 @@
+Shipping management functions:
+
+User Backend:
+
+CreatingShipment(item_dict) returns shipment_obj 
+
+CreateShippingRate() returns shipment_id (done by Joshua)
+
+RetrieveShippingRate(shipment_id) returns shipping rate obj
+
+UpdateShippingRate(shipment_id, field_to_update, value) returns shipping rate obj
+
+
+Admin Backend:
+
+should use shelve to store time:shipping rate obj
+
+ListShippingRates()
+
+CreateShippingEntry()
+
+UpdateShippingEntry()
+
+DeleteShippingEntry()
+
+rest and sleep or play games
+
+=========================================================================================
+
+
+Reward Management functions:
+
+CreateCoupon()
+

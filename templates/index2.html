@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/35900470e6.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="includes/index2.css">
+    <link rel="icon" type="image/x-icon" href="styles/media/favicon.ico">
+    <title>Pyth0n Basics</title>
+  </head>
+  <body>
+    <!-- NAVBAR SECTION -->
+    <div class="colored" id="title_section">
+      <div class="container-fluid">
+        <div class="Nav-bar">
+          <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#index_navbar" aria-controls="index_navbar" aria-expanded="false" aria-label="Toggle navigation" name="button">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="index_navbar">
+              <a class="navbar-brand big-header text-wrap" href="#">Medusa</a>
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#footer">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#Content">Content</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#why_us">Why Choose Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#why_us">Login</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="big-header">For Your Dream PC</h1>
+            <a href="demo_python_learner.html"><button type="button" class="main_page_button btn btn-dark btn-lg download-button" name="button">Register</button></a>
+            <a href="additional_resources.html"><button type="button" class="main_page_button btn btn-outline-light btn-lg download-button" name="button">Login</button></a>
+          </div>
+          <!-- hidden on screens smaller than lg -->
+          <!-- <div class="col-lg-6 d-lg-block d-none">
+            <img class="index_top_photo" src="styles/media/index_top_photo.jpg" alt="code_snippet">
+          </div> -->
+          <!-- d-lg-block d-none -->
+        </div>
+        </div>
+    </div>
+
+
+
+    <div class="not-colored">
+
+
+    <!-- py-4: padding for classes that set both *-top and *-bottom, set $spacer * 1.5 -->
+    <div id="Content" class="container py-4">
+      <header class="pb-3 mb-4 border-bottom">
+        <a class="align-items-center text-dark text-decoration-none" href="demo_python_learner.html">
+          <!-- fs-4: font size 4 -->
+          <span class="fs-2">Pyth0n_Basics</span>
+        </a>
+      </header>
+      <!-- p-5: padding set $spacer * 3 -->
+      <div class="p-5 mb-4 bg-primary rounded-3 text-white">
+        <div class="container-fluid py-5">
+          <!-- display value 5 xs -->
+          <h1 class="display-5 fw-bold">Getting Started</h1>
+          <p class="col-md-8 fs-4">
+            Not sure where to start? This guide will help you with the basics of python and how to setup a python environment.
+          </p>
+          <button class="btn btn-outline-light btn-lg" type="button" name="button"><a class="dark-text" href="demo_python_learner.html">Getting Started</a></button>
+        </div>
+      </div>
+      <div class="row align-items-md-stretch">
+        <!-- on a medium size screen, take up 6 columns -->
+        <div class="col-md-6">
+          <!-- h-90 : height 90% -->
+          <div class="h-90 p-5 text-dark bg-light border rounded-3">
+            <h2>Try It Out</h2>
+            <p>We have a python interpreter on the website for you to try out programming. Nothing beats hands-on!</p>
+            <button class="btn btn-outline-primary" type="button" name="button"><a href="interpreter_python_teacher.html">Try It Out</a></button>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <!-- h-90 : height 90% -->
+          <div class="h-90 p-5 text-white bg-dark border rounded-3">
+            <h2>Extend your Knowledge</h2>
+            <p>Ready to expand your python knowledge? Check out these recommended modules to explore!</p>
+            <button class="btn btn-outline-light" type="button" name="button"><a href="additional_resources.html">Modules</a></button>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- accordion on website's features -->
+      <div class="padding-bottom">
+        <h2 id="why_us" class="color">Website Features</h2>
+        <div class="accordion" id="accordion_features">
+          <!-- one accordion -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="header-one">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-one" aria-expanded = "true" aria-controls="collapse-one" name="button">
+                Code snippets and Examples
+              </button>
+            </h2>
+            <div id="collapse-one" class="accordion-collapse collapse show" aria-labelledby="header-one" data-bs-parent="#accordion_features">
+              <div class="accordion-body">
+                <strong>Examples</strong> will help you understand how the code works, with explanations provided to aid you in your learning.
+              </div>
+            </div>
+          </div>
+
+          <!-- second accordion -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="header-two">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-two" aria-expanded = "false" aria-controls="collapse-two" name="button">
+                Extra Resources
+              </button>
+            </h2>
+            <div id="collapse-two" class="accordion-collapse collapse" aria-labelledby="header-two" data-bs-parent="#accordion_features">
+              <div class="accordion-body">
+                <strong>Videos and recommended modules</strong> to further your knowledge in python will help you advance from basic to advanced.
+              </div>
+            </div>
+          </div>
+
+          <!-- third accordion -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="header-three">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-three" aria-expanded = "false" aria-controls="collapse-three" name="button">
+                Practice Ground
+              </button>
+            </h2>
+            <div id="collapse-three" class="accordion-collapse collapse" aria-labelledby="header-three" data-bs-parent="#accordion_features">
+              <div class="accordion-body">
+                <strong>A Built-In Interpreter</strong> on the website will assist you in practicing programming and improving your skills.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- carousel on recommended modules -->
+      <div class="" id="modules_section">
+        <h1>Sneakpeak on Extend Your Knowledge</h1>
+        <div class="carousel slide" data-bs-ride="carousel" id="carousel_for_modules">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <!-- from additional_resources.html -->
+              <div class="h-80 p-5 me-2 text-dark bg-light border rounded-3">
+                <div class="margin-right">
+                  <h2 class="resize_carousel_header"><a href="https://cryptography.io/en/latest/" target="_blank">pyca/cryptography</a></h2>
+                  <p>One of the many cryptography modules in Python.</p>
+                  <button class="btn btn-outline-primary" type="button" name="button"><a href="https://cryptography.io/en/latest/" target="_blank">Go to Docs</a></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <div class="margin-right">
+                  <h2><a href="https://matplotlib.org/stable/api/index" target="_blank">Matplotlib</a></h2>
+                  <p>Data Visualization for Python</p>
+                  <button class="btn btn-outline-primary" type="button" name="button"><a href="https://matplotlib.org/stable/api/index" target="_blank">Go to Docs</a></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="h-80 p-5 text-dark bg-light border rounded-3 make_center">
+                <div class="margin-right">
+                  <h2><a href="https://flask.palletsprojects.com/en/2.1.x/quickstart/" target="_blank">Flask</a></h2>
+                  <p>A web development framework for Python</p>
+                  <button class="btn btn-outline-primary" type="button" name="button"><a href="https://flask.palletsprojects.com/en/2.1.x/quickstart/" target="_blank">Go to Docs</a></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <div class="margin-right">
+                  <h2><a href="https://docs.python.org/3/library/turtle.html" target="_blank">Turtle</a></h2>
+                  <p>Module for drawing graphics in Python</p>
+                  <button class="btn btn-outline-primary" type="button" name="button"><a href="https://docs.python.org/3/library/turtle.html" target="_blank">Go to Docs</a></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <div class="margin-right">
+                  <h2><a href="https://pytorch.org/docs/stable/index.html" target="_blank">PyTorch</a></h2>
+                  <p>Tensor Library for Deep Learning</p>
+                  <button class="btn btn-outline-primary" type="button" name="button"><a href="https://pytorch.org/docs/stable/index.html" target="_blank">Go to Docs</a></button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-slide="prev" data-bs-target="#carousel_for_modules">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-slide="next" data-bs-target="#carousel_for_modules">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="scripts/demo_python_learner.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+  <footer class="footer_background footer_size footer" id="footer">
+    <h3>Contact Me</h3>
+    <a class="fa" href="mailto:prestongbr@gmail.com"><i class="resize_fa fa fa-solid fa-at"></i> <br> Gmail </a>
+    <a class="fa" href="mailto:221887z@mymail.nyp.edu.sg"><i class="resize_fa fa fa-solid fa-envelope"></i> <br> Outlook </a>
+    <a class="fa" href="#"><i class="resize_fa fa fa-brands fa-whatsapp"></i> <br> Whatsapp</a>
+    <p class="footer_phone_number">+65 12345678</p>
+    <a class="fa" href="#"><p>Back to Top <i class="fa fa-solid fa-arrow-up"></i></p></a>
+    <!-- Copyright &copy; {{current_year}} Preston Goh -->
+    <p id="copyright_footer"></p>
+  </footer>
+</html>

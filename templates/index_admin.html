@@ -1,0 +1,51 @@
+{% extends "admin_base.html" %}
+    <!-- NAVBAR SECTION -->
+  {% block content %}
+  <!-- NAVBAR SECTION -->
+    <div class="colored" id="title_section">
+      <div class="container-fluid container-padding">
+        <div class="Nav-bar">
+          <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#index_navbar" aria-controls="index_navbar" aria-expanded="false" aria-label="Toggle navigation" name="button">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="index_navbar">
+              <a class="navbar-brand big-header text-wrap" href="#">Medusa Admin</a>
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('admin_login') }}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('admin_login') }}">Shipments</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#why_us">Forum</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('pricelist_upload') }}">Pricelist</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="big-header">Admin Management Portal</h1>
+            <a href="{{ url_for('registerAdmin') }}"><button type="button" class="main_page_button btn btn-dark btn-lg download-button" name="button">Register</button></a>
+            <a href="{{ url_for('admin_login') }}"><button type="button" class="main_page_button btn btn-outline-light btn-lg download-button" name="button">Login</button></a>
+          </div>
+          <!-- hidden on screens smaller than lg -->
+          <!-- <div class="col-lg-6 d-lg-block d-none">
+            <img class="index_top_photo" src="styles/media/index_top_photo.jpg" alt="code_snippet">
+          </div> -->
+          <!-- d-lg-block d-none -->
+        </div>
+        </div>
+    </div>
+                    Photo by <a href="https://unsplash.com/@nervum?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Jack B</a> on <a href="https://unsplash.com/s/photos/pc-gaming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  </div>
+    {% endblock %}
+
+
+
+

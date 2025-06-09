@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<h1 class="display-4">Email Reset Link Failure</h1>
+
+<p><a href="{{url_for('login')}}">Click Here to Go back to Login and try again</a></p>
+
+{% endblock %}

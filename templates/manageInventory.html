@@ -1,0 +1,542 @@
+{% extends 'dashboard_adminbase.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 id="page-header">Inventory</h1>
+        </div>
+    {% from "includes/_formHelper.html" import render_field %}
+        <form action="{{ url_for('create_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated) }}" method="POST">
+<!--                    <input type="submit" value="Checkout" class="btn btn-dark">-->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createProduct">
+                        Create New Product
+                        </button>
+            <div class="modal" id="createProduct">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Create Product</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        {{ render_field(form.name, class="form-control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.price, class="form-control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.category, class="form-control") }}
+                                    </div>
+
+
+                                    Are you sure you want to continue?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Create" class="btn btn-warning">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+        </form>
+        <br>
+        <div class="my-w4 w-100">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Item Category</th>
+            <th>Item Description</th>
+            <th>Quantity</th>
+            <th>Quantity to Add</th>
+            <th>Delete Product</th>
+        </tr>
+        </thead>
+
+        {% for case in inventory.get_cases() %}
+        <tr>
+            <td>CASES</td>
+            <td>{{ case[1] }}</td>
+            <td>{{ inventory.get_case_stock()[inventory.get_cases().index(case)] }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='CASES', item_id=case[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='CASES', product_name=case[1], price=case[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{case[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{case[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for cpu in inventory.get_cpu() %}
+        <tr>
+            <td>CPU</td>
+            <td>{{ cpu[1] }}</td>
+            <td>{{ inventory.get_cpu_stock()[inventory.get_cpu().index(cpu)] }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='CPU', item_id=cpu[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='CPU', product_name=cpu[1], price=cpu[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{cpu[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{cpu[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for motherboard in inventory.get_motherboards() %}
+        <tr>
+            <td>MOTHERBOARDS</td>
+            <td>{{ motherboard[1] }}</td>
+            <td>{{ inventory.get_indi_motherboard_stock(motherboard) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MOTHERBOARDS', item_id=motherboard[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MOTHERBOARDS', product_name=motherboard[1], price=motherboard[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{motherboard[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{motherboard[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for cooling in inventory.get_cooling() %}
+        <tr>
+            <td>COOLING</td>
+            <td>{{ cooling[1] }}</td>
+            <td>{{ inventory.get_indi_cooling_stock(cooling) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='COOLING', item_id=cooling[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='COOLING', product_name=cooling[1], price=cooling[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{cooling[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{cooling[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for memory in inventory.get_memory() %}
+        <tr>
+            <td>MEMORY</td>
+            <td>{{ memory[1] }}</td>
+            <td>{{ inventory.get_indi_memory_stock(memory) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MEMORY', item_id=memory[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MEMORY', product_name=memory[1], price=memory[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{memory[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{memory[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for gpu in inventory.get_gpu() %}
+        <tr>
+            <td>GPU</td>
+            <td>{{ gpu[1] }}</td>
+            <td>{{ inventory.get_indi_gpu_stock(gpu) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='GPU', item_id=gpu[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='GPU', product_name=gpu[1], price=gpu[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{gpu[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{gpu[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for storage in inventory.get_storage() %}
+        <tr>
+            <td>STORAGE</td>
+            <td>{{ storage[1] }}</td>
+            <td>{{ inventory.get_indi_storage_stock(storage) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='STORAGE', item_id=storage[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='STORAGE', product_name=storage[1], price=storage[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{storage[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{storage[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for power in inventory.get_power() %}
+        <tr>
+            <td>POWER SUPPLY</td>
+            <td>{{ power[1] }}</td>
+            <td>{{ inventory.get_indi_power_stock(power) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='POWER', item_id=power[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='POWER', product_name=power[1], price=power[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{power[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{power[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for opsys in inventory.get_opsys() %}
+        <tr>
+            <td>OS</td>
+            <td>{{ opsys[1] }}</td>
+            <td>{{ inventory.get_indi_opsys_stock(opsys) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='OPSYS', item_id=opsys[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='OPSYS', product_name=opsys[1], price=opsys[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{opsys[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{opsys[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for keyboard in inventory.get_keyboards() %}
+        <tr>
+            <td>KEYBOARDS</td>
+            <td>{{ keyboard[1] }}</td>
+            <td>{{ inventory.get_indi_keyboard_stock(keyboard) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='KEYBOARDS', item_id=keyboard[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='KEYBOARDS', product_name=keyboard[1], price=keyboard[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{keyboard[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{keyboard[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+        {% for mouse in inventory.get_mouse() %}
+        <tr>
+            <td>MICE</td>
+            <td>{{ mouse[1] }}</td>
+            <td>{{ inventory.get_indi_mouse_stock(mouse) }}</td>
+            <td><form action="{{ url_for('addInventory', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MOUSE', item_id=mouse[1]) }}" method="POST">
+                <input type="number" id="num" name="num" min="1">
+                <input type="submit" value="Add" class="btn btn-warning">
+            </form></td>
+            <td><form action="{{ url_for('delete_product', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, item_type='MOUSE', product_name=mouse[1], price=mouse[0].split(',')[0],)}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{mouse[1]}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{mouse[1]}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to delete this feedback?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+            </div>
+        </main>
+
+{% endblock %}

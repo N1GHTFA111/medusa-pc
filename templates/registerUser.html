@@ -1,0 +1,59 @@
+{% extends 'login_base.html' %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<div class="subcontainer">
+    <div class="design_container">
+
+
+        <img class="img_make_smaller_register" src="{{ url_for('static', filename='media/medusa_logo.png')}}">
+<!--        <h2>Medusa</h2>-->
+    </div>
+
+
+    <div class="registration_container">
+        <h1 class="display-4">Register User</h1>
+
+<form method="POST" action="">
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.first_name, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.last_name, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.email, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.password, class="form-control") }}
+    </div>
+     <div class="form-group style_input_ver2">
+        {{ render_field(form.password_confirm, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.address, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.country, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.state, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.zip_code, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.company, class="form-control") }}
+    </div>
+    <div class="form-group style_input_ver2">
+        {{ render_field(form.phone, class="form-control") }}
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+</form>
+    </div>
+
+</div>
+
+
+{% endblock %}

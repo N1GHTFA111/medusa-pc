@@ -1,0 +1,20 @@
+for rewards system:
+- purge pointAccounts.db for the user_id that is associated with that name
+- remove coupon once used
+
+pointAccounts.db should contain the user email as the key and the PointsAccount obj as the value
+
+need a database that stores all the user's available vouchers
+The Coupon obj will be associated with the email of the user
+it will use stripe and the Coupon class blueprint to create the voucher to get the coupon_id which can be used during checkout
+after use, the coupon will be deleted using the stripe function using the coupon_id
+the user's available vouchers will also be removed with that Coupon_obj_blueprint
+
+to make it simple, a promocode will also take the form of a coupon, just that it can be viewed by all users
+and it is not deleted unless the admin deletes the coupon code
+
+guests can only use promo codes but cannot get points or redeem vouchers
+hence only users can have pointAccounts
+
+
+

@@ -1,0 +1,29 @@
+{% extends 'login_base.html' %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<div>
+    <img class="img_make_smaller" src="https://static.vecteezy.com/system/resources/previews/007/741/295/original/medusa-logo-natural-beautiful-woman-s-face-snakes-line-art-logo-for-beauty-salon-free-vector.jpg">
+</div>
+
+
+<div class="login_float_right">
+    <h1 class="display-4 enlarge_txt">Login User</h1>
+
+<form method="POST" action="">
+    <div class="form-group style_input">
+        {{ render_field(form.email, class="form-control") }}
+    </div>
+    <div class="form-group style_input">
+        {{ render_field(form.password, class="form-control") }}
+    </div>
+    <div class="">
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+        <button class="btn btn-secondary"><a href="{{url_for('forget_password')}}" class="change_text_color_forget_pw">Forget Password</a></button>
+    </div>
+
+</form>
+</div>
+
+
+{% endblock %}

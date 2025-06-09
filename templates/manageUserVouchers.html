@@ -1,0 +1,53 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+         <h1>Current Points: {{points}}</h1>
+            <hr>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Your Vouchers</h1>
+        </div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Available Vouchers</h1>
+        </div>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+            {% for voucher_key in voucher_database %}
+            <tr>
+                <td>{{voucher_key}}</td>
+                <td>{{ retrieve_voucher(voucher_key)["percent_off"] }}</td>
+            </tr>
+            {% endfor %}
+        <br>
+        <div class="my-w4 w-100">
+          <div class="row align-items-md-stretch">
+              {% for key in coupons_dict %}
+            <!-- on a medium size screen, take up 6 columns -->
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{ coupons_dict[key].get_name()}}</a></h2>
+                <p>Points needed: {{ coupons_dict[key].get_required_points()}}</p>
+                  {% if check_pts_account_balance(points, coupons_dict[key].get_required_points()) %}
+                <button id="redeem" class="btn btn-outline-primary" type="button" name="button" onclick=""><a class="remove_hyperlink_decoration" href="{{url_for('create_voucher', username=current_user.get_first_name(), price=coupons_dict[key].get_required_points(), coupon_id=coupons_dict[key].get_id())}}">Redeem</a></button>
+                  {% else %}
+                  <button id="cannot_redeem" class="btn btn-outline-primary" type="button" name="button" onclick="" disabled><a class="remove_hyperlink_decoration">Redeem</a></button>
+                  {% endif %}
+              </div>
+
+            </div>
+              {% endfor %}
+
+
+
+            </div>
+          </div>
+
+        </main>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Custom Medusa PCs</h1>
+        </div>
+        <br>
+        <div class="my-w4 w-100">
+          <h2>Get your accessories here!</h2>
+          <div class="row align-items-md-stretch">
+            <!-- on a medium size screen, take up 6 columns -->
+              {% for keyboard in inventory.get_keyboards() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{keyboard[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+
+                <form action="{{ url_for('create_accessory', logged_in=current_user.is_authenticated, part_name=keyboard[1], part_price=keyboard[0].split(',')[0], part_category='KEYBOARDS') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(keyboard[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(keyboard[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                {% for mouse in inventory.get_mouse() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{mouse[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_accessory', logged_in=current_user.is_authenticated, part_name=mouse[1], part_price=mouse[0].split(',')[0], part_category='MOUSE') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(mouse[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(mouse[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+
+
+
+
+
+            </div>
+          </div>
+        </main>
+
+{% endblock %}

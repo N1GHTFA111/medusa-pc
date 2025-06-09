@@ -1,0 +1,166 @@
+{% extends 'dashboard_adminbase.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 id="page-header">All Coupons</h1>
+        </div>
+        <br>
+    {% from "includes/_formHelper.html" import render_field %}
+        <form action="{{ url_for('create_discount_code', username=current_user.get_first_name(), logged_in=current_user.is_authenticated) }}" method="POST">
+<!--                    <input type="submit" value="Checkout" class="btn btn-dark">-->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createcoupon">
+                        Create New Coupon
+                        </button>
+            <div class="modal" id="createcoupon">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Create Coupon (Percent Off)</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                        {{ render_field(form.name_of_discount, class="form_control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.discount_amount, class="form_control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.type_of_discount, class="form_control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.discount_code, class="form_control") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ render_field(form.points_required, class="form_control") }}
+                                    </div>
+
+
+                                    Are you sure you want to continue?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Create" class="btn btn-warning">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+        </form>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Promo Code</th>
+            <th>Value</th>
+            <th>Required Points</th>
+            <th>Duration</th>
+            <th>Date of Creation</th>
+            <th>Status</th>
+            <th>Update Status</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        {% for coupon_blueprint_key in coupons_dict %}
+            <tr>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_id() }}</td>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_name() }}</td>
+                {% if isPromo(coupons_dict[coupon_blueprint_key]) %}
+                <td>{{ coupons_dict[coupon_blueprint_key].get_voucher_code() }}</td>
+                {% else %}
+                <td>None</td>
+                {% endif %}
+                <td>{{ coupons_dict[coupon_blueprint_key].get_percent() }}</td>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_required_points() }}</td>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_expiry_date() }}</td>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_date_of_creation() }}</td>
+                <td>{{ coupons_dict[coupon_blueprint_key].get_status() }}</td>
+                <td><form action="{{ url_for('update_discount_code', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, coupon_id=coupons_dict[coupon_blueprint_key].get_id())}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                     <select name="statuses">
+                    <option value="Active">Active</option>
+                    <option value="Expired">Expired</option>
+                </select>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{coupons_dict[coupon_blueprint_key].get_id()}}_confirm">
+                        Confirm
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{coupons_dict[coupon_blueprint_key].get_id()}}_confirm">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to update the discount status?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Update" class="btn btn-warning">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+
+
+            {% if coupons_dict[coupon_blueprint_key].get_status() == "Expired" %}
+            <td><form action="{{ url_for('delete_discount_code', username=current_user.get_first_name(), logged_in=current_user.is_authenticated, coupon_id=coupons_dict[coupon_blueprint_key].get_id())}}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{coupons_dict[coupon_blueprint_key].get_id()}}_delete">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{coupons_dict[coupon_blueprint_key].get_id()}}_delete">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to remove this discount?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+            {% else %}
+            <td>Unavailable</td>
+            {% endif %}
+                </tr>
+            {% endfor %}
+    </table>
+
+        </main>
+
+
+{% endblock %}

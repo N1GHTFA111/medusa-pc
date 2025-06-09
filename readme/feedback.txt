@@ -1,0 +1,18 @@
+create feedback
+the form will pop up as a modal
+it will create a feedback obj using a feedback form
+each feedback will be given an id
+the feedback obj will contain the user id to 
+
+read feedback
+from the feedback.db, show up as table form first
+
+update feedback
+pop up the form from an update form that will edit that feedback obj and it will have prefilled fields from previous feedback
+
+delete feedback
+admin can remove feedback
+user can delete their own feedback
+
+
+use uuid to generate unique id

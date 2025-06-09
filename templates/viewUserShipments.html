@@ -1,0 +1,93 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Pending Shipments</h1>
+        </div>
+        <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Shipping Id</th>
+            <th>Item Name</th>
+            <th>Item Description</th>
+            <th>Item Price</th>
+            <th>Order Date</th>
+            <th>Collection Method</th>
+            <th>Shipping Status</th>
+
+        </tr>
+        </thead>
+        {% for shipment_key in shipments_dict %}
+        {% if shipments_dict[shipment_key].get_shipping_status() != "Received" and shipments_dict[shipment_key].get_item().get_owner() == current_user.get_first_name() %}
+        <tr>
+            <td>{{ shipments_dict[shipment_key].get_id() }}</td>
+            <td>{{ shipments_dict[shipment_key].get_item().get_description() }}</td>
+            <td><form action="">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{shipments_dict[shipment_key].get_id()}}">
+                        View More
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{shipments_dict[shipment_key].get_id()}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Item Details</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Item Specifications</th>
+                                            <th>Item Price</th>
+                                        </tr>
+                                        <tr>
+
+                                            <td>{{ shipments_dict[shipment_key].get_item().get_description() }}</td>
+                                            {% if is_PC(shipments_dict[shipment_key].get_item().get_item()) %}
+                                            <td>
+                                                {% for line in shipments_dict[shipment_key].get_item().get_item().get_info() %}
+                                                <p>{{line}}</p>
+                                                {% endfor %}
+                                            </td>
+                                            {% else %}
+                                            <td>{{ shipments_dict[shipment_key].get_item().get_item().get_info() }}</td>
+                                            {% endif %}
+                                            <td>{{ shipments_dict[shipment_key].get_item().get_price() }}</td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form></td>
+            <td>{{shipments_dict[shipment_key].get_item().get_price()}}</td>
+            <td>{{shipments_dict[shipment_key].get_order_date()}}</td>
+            <td>{{shipments_dict[shipment_key].get_item().get_collection_type() }}</td>
+            <td>{{shipments_dict[shipment_key].get_shipping_status() }}</td>
+            {% endif %}
+
+
+
+        </tr>
+        {% endfor %}
+    </table>
+
+        </main>
+
+
+{% endblock %}

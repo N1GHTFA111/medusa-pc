@@ -1,0 +1,367 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Custom Medusa PCs</h1>
+        </div>
+        <br>
+        <div class="my-w4 w-100">
+          <h2>Configure and personalise your PC here!</h2>
+          <div class="row align-items-md-stretch">
+            <!-- on a medium size screen, take up 6 columns -->
+              {% for case in inventory.get_cases() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{case[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+<!--                <button id="{{case[1]}}" class="btn btn-outline-primary" type="button" name="button" onclick=""><a class="remove_hyperlink_decoration" href="{{ url_for('create_custom_pc', logged_in=current_user.is_authenticated)}}">Add to Cart</a></button>-->
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=case[1], part_price=case[0].split(',')[0], part_category='CASES') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(case[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(case[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                {% for cpu in inventory.get_cpu() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{cpu[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=cpu[1], part_price=cpu[0].split(',')[0], part_category='CPU') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(cpu[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(cpu[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                   {% for motherboard in inventory.get_motherboards() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{motherboard[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=motherboard[1], part_price=motherboard[0].split(',')[0], part_category='MOTHERBOARDS') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(motherboard[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(motherboard[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                     {% for cooling in inventory.get_cooling() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{cooling[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=cooling[1], part_price=cooling[0].split(',')[0], part_category='COOLING') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(cooling[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(cooling[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                       {% for memory in inventory.get_memory() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{memory[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=memory[1], part_price=memory[0].split(',')[0], part_category='MEMORY') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(memory[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(memory[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                         {% for gpu in inventory.get_gpu() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{gpu[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=gpu[1], part_price=gpu[0].split(',')[0], part_category='GPU') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(gpu[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(gpu[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                           {% for storage in inventory.get_storage() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{storage[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=storage[1], part_price=storage[0].split(',')[0], part_category='STORAGE') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(storage[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(storage[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+                             {% for power in inventory.get_power() %}
+            <div class="col-md-4">
+              <!-- h-90 : height 90% -->
+              <div class="h-80 p-5 text-dark bg-light border rounded-3">
+                <img class="resize_pc_img" src="{{ url_for('static', filename='media/stock_pc_1.jpg')}}">
+                <h2><a class="dynamic_resize_text remove_hyperlink_decoration">{{power[1]}}</a></h2>
+                <p>Specs goes here...</p>
+
+                <form action="{{ url_for('create_part', logged_in=current_user.is_authenticated, part_name=power[1], part_price=power[0].split(',')[0], part_category='POWER') }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal_{{inventory.replace_space_with_underscore(power[1])}}">
+                        Add to Cart
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{inventory.replace_space_with_underscore(power[1])}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Add to Cart</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to add this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Add to Cart" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
+            </div>
+              {% endfor %}
+
+
+
+
+            </div>
+          </div>
+        </main>
+
+{% endblock %}

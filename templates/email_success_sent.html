@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<h1 class="display-4">Email Sent Successfully</h1>
+
+<p>Check your email for the reset link or <a href="{{url_for('login')}}">Click Here to Go Back to Login</a></p>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'dashboard_adminbase.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 id="page-header">Upload New Price List</h1>
+        </div>
+        <br>
+        <form action="{{ url_for('pricelist_upload', username=current_user.get_first_name(), logged_in=current_user.is_authenticated)}}" enctype="multipart/form-data" method="POST">
+            <input type="file" id="pricelist" name="pricelist">
+            <input type="submit">
+        </form>
+
+        </main>
+
+
+{% endblock %}

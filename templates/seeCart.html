@@ -1,0 +1,207 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Your Cart</h1>
+        </div>
+        <br>
+        <div class="my-w4 w-100">
+            {% if count == 0 %}
+            <p>There are no items.</p>
+            {% elif count == 1%}
+            <p>There is 1 item.</p>
+            {% else %}
+            <p>There are {{ count }} items.</p>
+            {% endif %}
+            <div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Item ID</th>
+            <th>Item</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><a href="#" class="btn btn-warning">Update</a></td>
+            <td>
+                <form action="" method="POST">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+        {% for item in cart_list %}
+        <tr>
+            <td>{{ item.get_id() }}</td>
+            <td>{{ item.get_description() }}</td>
+                {% if is_PC(item.get_item()) %}
+                <td><a href="{{ url_for('update_custom_pc',username=current_user.get_first_name(), logged_in=current_user.is_authenticated, id=item.get_id()) }}" class="btn btn-warning">Update</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+<!--            <td>-->
+<!--                <form action="{{ url_for('update_custom_pc',username=current_user.get_first_name(), logged_in=current_user.is_authenticated, id=item.get_id()) }}" method="POST">-->
+<!--                    <a href="" class="btn btn-warning">Update</a>-->
+<!--                </form>-->
+<!--            </td>-->
+
+
+            <td>
+                <form action="{{ url_for('delete_item',username=current_user.get_first_name(), logged_in=current_user.is_authenticated, id=item.get_id()) }}" method="POST">
+<!--                    <input type="submit" value="Delete" class="btn btn-danger">-->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{item.get_id()}}">
+                        Delete
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal_{{item.get_id()}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to remove this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Delete" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+                <div>
+                    <h2>Total: SGD{{ total_price }}</h2>
+                    <br>
+                    {% if check_for_invoice() == True %}
+                    <h2>Download Invoice Here: <a href="invoice.pdf">Download Invoice</a></h2>
+                    {% else %}
+                    <br>
+                    {% endif %}
+                    <br>
+                    <br>
+                    <form action="{{ url_for('checkout', logged_in=current_user.is_authenticated) }}" method="POST">
+<!--                    <input type="submit" value="Checkout" class="btn btn-dark">-->
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Checkout
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Checkout Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Item Specifications</th>
+                                            <th>Item Price</th>
+                                        </tr>
+                                        {% for item in cart_list %}
+                                        <tr>
+
+                                            <td>{{ item.get_description() }}</td>
+                                            {% if is_PC(item.get_item()) %}
+                                            <td>
+                                                {% for line in item.get_item().get_info() %}
+                                                <p>{{line}}</p>
+                                                {% endfor %}
+                                            </td>
+                                            {% else %}
+                                            <td>{{ item.get_item().get_info() }}</td>
+                                            {% endif %}
+                                            <td>{{ item.get_price() }}</td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+
+
+                                    <div class="form-group">
+                                        <label for="shipping_date">Shipping/Collection Date</label>
+                                        <input id="shipping_date" class="form-control datepicker" name="shipping_date" type="date" value="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="collection_type">Collection Time</label>
+                                        <ul id="shipping_time" class="form-check" style="list-style-type:none">
+                                            <li>
+                                                <input id="shipping_time-0" checked="" name="shipping_time" type="radio" value="9am-12pm" required>
+                                                <label for="shipping_time-0">9am to 12pm</label>
+                                            </li>
+                                            <li>
+                                                <input id="shipping_time-1" checked="" name="shipping_time" type="radio" value="2pm-5pm">
+                                                <label for="shipping_time-1">2pm to 5pm</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="collection_type">Collection Type</label>
+                                        <ul id="collection_type" class="form-check" style="list-style-type:none">
+                                            <li>
+                                                <input id="collection_type-0" checked="" name="collection_type" type="radio" value="Delivery" required>
+                                                <label for="collection_type-0">Delivery</label>
+                                            </li>
+                                            <li>
+                                                <input id="collection_type-1" checked="" name="collection_type" type="radio" value="Pick-Up">
+                                                <label for="collection_type-1">Pick-Up</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="destination_address">Destination Address</label>
+                                        <input class="form_control lengthen-input-destination-address" id="destination_address" maxlength="200" minlength="1" name="destination_address" required type="text" value="{{current_user.get_address() + ' ' + current_user.get_country() + ' ' + current_user.get_zip_code()}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="voucher_form">Voucher ID</label>
+                                        <input class="form_control lengthen-input-destination-address" id="voucher_form" maxlength="200" minlength="1" name="voucher_form" required type="text" value="">
+                                    </div>
+
+                                    <br>
+
+
+                                    Are you sure you want to checkout?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Checkout" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+</div>
+            </div>
+        </main>
+
+
+{% endblock %}

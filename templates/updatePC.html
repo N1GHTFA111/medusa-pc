@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<div class="add_margin">
+<h1 class="display-4">Update PC</h1>
+
+<form method="POST" action="">
+    <div class="form-group">
+        {{ render_field(form.description, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.case, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.cpu, class="form_control") }}
+    </div>
+  <div class="form-group">
+        {{ render_field(form.motherboard, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.cooling, class="form_control") }}
+    </div>
+  <div class="form-group">
+        {{ render_field(form.memory, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.gpu, class="form_control") }}
+    </div>
+  <div class="form-group">
+        {{ render_field(form.primary_storage, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.power_supply, class="form_control") }}
+    </div>
+  <div class="form-group">
+        {{ render_field(form.op_sys, class="form_control") }}
+    </div>
+    <div class="form-group">
+        {{ render_field(form.wifi_bluetooth, class="form_control") }}
+    </div>
+<!--    <input type="submit" value="Submit" class="btn btn-primary"/>-->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+                        Update
+                    </button>
+<!--                    Modal-->
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+<!--                                Modal Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+<!--                                Modal Body-->
+                                <div class="modal-body">
+                                    Are you sure you want to update this item from your cart?
+                                </div>
+
+<!--                                Modal Footer-->
+                                <div class="modal-footer">
+                                    <input type="submit" value="Update" class="btn btn-danger">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+</form>
+</div>
+{% endblock %}

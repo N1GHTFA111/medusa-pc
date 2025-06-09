@@ -1,0 +1,20 @@
+{% extends 'dashboardbase.html' %}
+
+{% block content %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1>Download the latest price list</h1>
+        </div>
+        <br>
+        {% if check_for_pricelist() == True %}
+        <form method="POST" action="{{ url_for('pricelist_download', username=current_user.get_first_name(), logged_in=current_user.is_authenticated) }}">
+            <h2>Download Invoice Here</h2>
+            <input type="submit">
+        </form>
+
+        {% else %}
+        <h2>Price is Unavailable at this time.</h2>
+        {% endif %}
+        </main>
+
+{% endblock %}
